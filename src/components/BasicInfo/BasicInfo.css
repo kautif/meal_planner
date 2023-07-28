@@ -1,0 +1,12 @@
+.basicInfo__form__select,
+.basicInfo__container {
+    width: 50%;
+}
+
+.basicInfo__form {
+    width: 55%;
+}
+
+.row {
+    flex-direction: column;
+}
