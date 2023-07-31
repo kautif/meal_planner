@@ -13,7 +13,8 @@ const initialState = {
         lbs: 0,
         cm: 0,
         kg: 0
-    }
+    },
+    food: []
 }
 
 export const plannerSlice = createSlice({
@@ -91,6 +92,10 @@ export const plannerSlice = createSlice({
             const cmConversion = feetToCm + inchesToCm;
             state.convert.cm = cmConversion.toFixed(2);
             console.log("cm conversion: ", state.convert.cm);
+        },
+        addFood: (state, action) => {
+            state.food = [...state.food, action.payload];
+            console.log("Food: ", state.food);
         }
     }
 })
@@ -105,5 +110,7 @@ export const { setSex,
                 convertLbsToKg, 
                 setFeet, 
                 setInches, 
-                convertFeetAndInchesToCm } = plannerSlice.actions;
+                convertFeetAndInchesToCm,
+                addFood
+            } = plannerSlice.actions;
 export default plannerSlice.reducer;
