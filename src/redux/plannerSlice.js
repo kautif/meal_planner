@@ -14,7 +14,9 @@ const initialState = {
         cm: 0,
         kg: 0
     },
-    food: []
+    food: [],
+    currentIntake: 0,
+    dailyIntake: 0
 }
 
 export const plannerSlice = createSlice({
@@ -57,11 +59,11 @@ export const plannerSlice = createSlice({
     
     
                 if (state.sex.toLowerCase() === "male") {
-                    state.intake = (66.47 + (13.75 * state.weight) + (5.003 * state.height) - (6.755 * state.age)) * activityLevel;
-                    state.intake = state.intake.toFixed();
+                    state.dailyIntake = (66.47 + (13.75 * state.weight) + (5.003 * state.height) - (6.755 * state.age)) * activityLevel;
+                    state.dailyIntake = state.dailyIntake.toFixed();
                 } else {
-                    state.intake = (655.1 + (9.563 * state.weight) + (1.850 * state.height) - (4.676 * state.age)) * activityLevel;
-                    state.intake = state.intake.toFixed();
+                    state.dailyIntake = (655.1 + (9.563 * state.weight) + (1.850 * state.height) - (4.676 * state.age)) * activityLevel;
+                    state.dailyIntake = state.dailyIntake.toFixed();
                 }
             } else {
                 alert(`sex: ${state.sex}, weight: ${state.weight}, height: ${state.height}, activity: ${state.activity}`);
@@ -95,7 +97,11 @@ export const plannerSlice = createSlice({
         },
         addFood: (state, action) => {
             state.food = [...state.food, action.payload];
-            console.log("Food: ", state.food);
+            state.currentIntake += action.payload.energy * action.payload.quantity;
+        },
+        removeFood: (state, action) => {
+            state.currentIntake -= state.food[action.payload].energy * state.food[action.payload].quantity;
+            state.food.splice(action.payload, 1);
         }
     }
 })
@@ -111,6 +117,7 @@ export const { setSex,
                 setFeet, 
                 setInches, 
                 convertFeetAndInchesToCm,
-                addFood
+                addFood,
+                removeFood
             } = plannerSlice.actions;
 export default plannerSlice.reducer;

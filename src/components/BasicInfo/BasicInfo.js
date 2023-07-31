@@ -10,7 +10,7 @@ import { setSex, setHeight, setWeight, setActivity, calcIntake } from "../../red
 
 export default function BasicInfo () {
     const dispatch = useDispatch();
-    const intake = useSelector((state) => state.planner.intake);
+    const dailyIntake = useSelector((state) => state.planner.dailyIntake);
     return (
         <div className="basicInfo__container">
         <Form>
@@ -83,7 +83,7 @@ export default function BasicInfo () {
                 </Row>
                 <Row className="mt-3">
                     <h3>Daily Caloric Intake</h3>
-                    <h5>{intake}</h5>
+                    <h5>{dailyIntake}</h5>
                 </Row>
             </Container>
         </Form>

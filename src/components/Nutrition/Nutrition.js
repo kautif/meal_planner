@@ -4,8 +4,13 @@ import axios from "axios";
 import { addFood } from "../../redux/plannerSlice";
 import { useSelector, useDispatch } from "react-redux";
 import Nav from "../Nav/Nav";
+import { current } from "@reduxjs/toolkit";
+import { Link } from "react-router-dom";
 
 function Nutrition () {
+    const dailyIntake = useSelector(state => state.planner.dailyIntake);
+    const currentIntake = useSelector(state => state.planner.currentIntake);
+
     const [search, setSearch] = useState("");
     let [food, setFood] = useState([]);
     let foodResults;
@@ -47,7 +52,7 @@ function Nutrition () {
                                 }
                             })
                         }</td>
-                        <td><input className={`food-quantity-${i}`} type="number" /></td>
+                        <td><input className={`w-50 food-quantity-${i}`} type="number" /></td>
                         <td><button
                                 onClick={() => {
                                     dispatch(addFood({
@@ -90,8 +95,12 @@ function Nutrition () {
                         getNutrition();
                 }}>Search</Button>
             </Form>
+            <div className="d-flex">
             <div>
-                <table className="ml-auto mr-auto mt-3">
+                <p>Expected Daily Intake: {dailyIntake === 0 ? <span>Go here to calculate your daily intake: <Link to="/calculations">Calculations</Link></span> : dailyIntake}</p>
+                <p>Current Daily Intake: <span className={currentIntake <= dailyIntake ? "text-success" : "text-danger"}>{currentIntake}</span></p>
+            </div>
+                <table className="ml-auto mt-3">
                     <tr>
                         <th>Food</th>
                         <th>Brand</th>
@@ -100,7 +109,9 @@ function Nutrition () {
                         <th>Quantity</th>
                         <th>Add</th>
                     </tr>
-                    {retrievedFood}
+                    <tbody>
+                        {retrievedFood}
+                    </tbody>
                 </table>
             </div>
         </div>
