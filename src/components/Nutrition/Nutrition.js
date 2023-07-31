@@ -61,7 +61,9 @@ function Nutrition () {
                                         servingSize: foodItem.servingSize,
                                         servingSizeUnit: foodItem.servingSizeUnit,
                                         energy: nutrientValue,
-                                        quantity: parseInt(document.getElementsByClassName(`food-quantity-${i}`)[0].value)
+                                        quantity: document.getElementsByClassName(`food-quantity-${i}`)[0].value <= parseInt("1") ? 
+                                        document.getElementsByClassName(`food-quantity-${i}`)[0].value = 1 : 
+                                        parseInt(document.getElementsByClassName(`food-quantity-${i}`)[0].value)
                                     }))
                                 }}
 

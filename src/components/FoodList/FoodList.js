@@ -3,6 +3,7 @@ import Nav from "../Nav/Nav";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFood } from "../../redux/plannerSlice";
 import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 export default function FoodList () {
     const foods = useSelector(state => state.planner.food);
@@ -32,7 +33,7 @@ export default function FoodList () {
             <h1>Food List</h1>
             <div className="d-flex">
                 <div>
-                    <p>Expected Daily Intake: {dailyIntake}</p>
+                <p>Expected Daily Intake: {dailyIntake === 0 ? <span>Go here to calculate your daily intake: <Link to="/calculations">Calculations</Link></span> : dailyIntake}</p>
                     <p>Current Daily Intake: <span className={currentIntake <= dailyIntake ? "text-success" : "text-danger"}>{currentIntake}</span></p>
                 </div>
                 <table className="ml-auto mt-3">
