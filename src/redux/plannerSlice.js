@@ -26,6 +26,9 @@ export const plannerSlice = createSlice({
         setSex: (state, action) => {
             state.sex = action.payload;
         },
+        setAge: (state, action) => {
+            state.age = action.payload;
+        },
         setHeight: (state, action) => {
             state.height = action.payload;
         },
@@ -99,6 +102,9 @@ export const plannerSlice = createSlice({
             state.food = [...state.food, action.payload];
             state.currentIntake += action.payload.energy * action.payload.quantity;
         },
+        updateFoodQuantity: (state, action) => {
+            state.food[action.payload.index].quantity = action.payload.quantity;
+        },
         removeFood: (state, action) => {
             state.currentIntake -= state.food[action.payload].energy * state.food[action.payload].quantity;
             state.food.splice(action.payload, 1);
@@ -107,7 +113,8 @@ export const plannerSlice = createSlice({
 })
 
 
-export const { setSex, 
+export const { setSex,
+                setAge, 
                 setHeight, 
                 setWeight, 
                 setActivity, 
@@ -118,6 +125,7 @@ export const { setSex,
                 setInches, 
                 convertFeetAndInchesToCm,
                 addFood,
+                updateFoodQuantity,
                 removeFood
             } = plannerSlice.actions;
 export default plannerSlice.reducer;

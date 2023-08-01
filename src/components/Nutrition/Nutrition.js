@@ -1,19 +1,21 @@
 import React, { useState } from "react";
 import { Form, Control, Button } from "react-bootstrap";
 import axios from "axios";
-import { addFood } from "../../redux/plannerSlice";
+import { addFood, updateFoodQuantity } from "../../redux/plannerSlice";
 import { useSelector, useDispatch } from "react-redux";
 import Nav from "../Nav/Nav";
-import { current } from "@reduxjs/toolkit";
 import { Link } from "react-router-dom";
+import { current } from "@reduxjs/toolkit";
 
 function Nutrition () {
     const dailyIntake = useSelector(state => state.planner.dailyIntake);
     const currentIntake = useSelector(state => state.planner.currentIntake);
+    const currentFoods = useSelector(state => state.planner.food);
 
     const [search, setSearch] = useState("");
     let [food, setFood] = useState([]);
     let foodResults;
+    let foodQuantity = 0;
 
     const dispatch = useDispatch();
     const foodArr = useSelector(state => state.planner.food);
@@ -55,16 +57,32 @@ function Nutrition () {
                         <td><input className={`w-50 food-quantity-${i}`} type="number" /></td>
                         <td><button
                                 onClick={() => {
-                                    dispatch(addFood({
-                                        desc: foodItem.description, 
-                                        brand: foodItem.brandOwner,
-                                        servingSize: foodItem.servingSize,
-                                        servingSizeUnit: foodItem.servingSizeUnit,
-                                        energy: nutrientValue,
-                                        quantity: document.getElementsByClassName(`food-quantity-${i}`)[0].value <= parseInt("1") ? 
-                                        document.getElementsByClassName(`food-quantity-${i}`)[0].value = 1 : 
-                                        parseInt(document.getElementsByClassName(`food-quantity-${i}`)[0].value)
-                                    }))
+                                    if (currentFoods.length < 1) {
+                                        dispatch(addFood({
+                                            desc: foodItem.description, 
+                                            brand: foodItem.brandOwner,
+                                            servingSize: foodItem.servingSize,
+                                            servingSizeUnit: foodItem.servingSizeUnit,
+                                            energy: nutrientValue,
+                                            quantity: document.getElementsByClassName(`food-quantity-${i}`)[0].value <= parseInt("1") ? 
+                                            document.getElementsByClassName(`food-quantity-${i}`)[0].value = 1 : 
+                                            parseInt(document.getElementsByClassName(`food-quantity-${i}`)[0].value)
+                                        }))
+                                    } else {
+                                        currentFoods.map((currentFood, index) => {
+                                            if (currentFood.desc === foodItem.description && currentFood.brand === foodItem.brandOwner) {
+                                                document.getElementsByClassName(`food-quantity-${i}`)[0].value <= parseInt("1") ? 
+                                            foodQuantity = 1 + currentFood.quantity : 
+                                            foodQuantity = currentFood.quantity + parseInt(document.getElementsByClassName(`food-quantity-${i}`)[0].value)
+                                                // Con't 7/31/23: make updateDailyIntake reducer. 
+                                                    // Take the quantity from the input when adding the food, multiply that by the energy and add that amount on top of the current value of the daily intake
+                                                dispatch(updateFoodQuantity({
+                                                    index: index,
+                                                    quantity: foodQuantity
+                                                }))
+                                            }
+                                        })
+                                    }
                                 }}
 
                         >Add Food</button></td>

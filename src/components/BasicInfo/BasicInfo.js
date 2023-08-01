@@ -6,7 +6,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import "./BasicInfo.css";
 import { useSelector, useDispatch} from "react-redux";
-import { setSex, setHeight, setWeight, setActivity, calcIntake } from "../../redux/plannerSlice";
+import { setSex, setAge, setHeight, setWeight, setActivity, calcIntake } from "../../redux/plannerSlice";
 
 export default function BasicInfo () {
     const dispatch = useDispatch();
@@ -41,6 +41,15 @@ export default function BasicInfo () {
                     </Form.Group>
                 </Row>
                 <Row className="mt-3">
+                    <Form.Group>
+                        <Form.Label>Age: </Form.Label>
+                        <Form.Control 
+                            type="number"
+                            placeholder="How many years old are you?"
+                            required={true}
+                            onChange={(e) => dispatch(setAge(e.target.value))}
+                        />
+                    </Form.Group>
                     <Form.Group>
                         <Form.Label>Weight: </Form.Label>
                         <Form.Control 
