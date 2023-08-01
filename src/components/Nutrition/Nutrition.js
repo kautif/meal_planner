@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Form, Control, Button } from "react-bootstrap";
 import axios from "axios";
+import env from "react-dotenv";
+
 import { addFood, updateFoodQuantity, updateDailyIntake } from "../../redux/plannerSlice";
 import { useSelector, useDispatch } from "react-redux";
 import Nav from "../Nav/Nav";
@@ -19,9 +21,7 @@ function Nutrition () {
 
     const dispatch = useDispatch();
     const foodArr = useSelector(state => state.planner.food);
-
-    // const url = `https://api.api-ninjas.com/v1/nutrition?query=${search}`;
-    const url = `https://api.nal.usda.gov/fdc/v1/foods/search?query=${search}&api_key=nx5ZbSvl7zCCZg6XJtn4sjVtwv5HABjQ8aBSBVdu`
+    const url = `https://api.nal.usda.gov/fdc/v1/foods/search?query=${search}&api_key=${process.env.REACT_APP_API_KEY}`
     function getNutrition() {
         const options = {
             method: "GET",
