@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Form, Control, Button } from "react-bootstrap";
 import axios from "axios";
-import { addFood, updateFoodQuantity } from "../../redux/plannerSlice";
+import { addFood, updateFoodQuantity, updateDailyIntake } from "../../redux/plannerSlice";
 import { useSelector, useDispatch } from "react-redux";
 import Nav from "../Nav/Nav";
 import { Link } from "react-router-dom";
@@ -76,6 +76,7 @@ function Nutrition () {
                                             foodQuantity = currentFood.quantity + parseInt(document.getElementsByClassName(`food-quantity-${i}`)[0].value)
                                                 // Con't 7/31/23: make updateDailyIntake reducer. 
                                                     // Take the quantity from the input when adding the food, multiply that by the energy and add that amount on top of the current value of the daily intake
+                                                dispatch(updateDailyIntake(currentFood.energy * parseInt(document.getElementsByClassName(`food-quantity-${i}`)[0].value)))
                                                 dispatch(updateFoodQuantity({
                                                     index: index,
                                                     quantity: foodQuantity

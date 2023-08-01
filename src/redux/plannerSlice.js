@@ -105,6 +105,9 @@ export const plannerSlice = createSlice({
         updateFoodQuantity: (state, action) => {
             state.food[action.payload.index].quantity = action.payload.quantity;
         },
+        updateDailyIntake: (state, action) => {
+            state.currentIntake += action.payload;
+        },
         removeFood: (state, action) => {
             state.currentIntake -= state.food[action.payload].energy * state.food[action.payload].quantity;
             state.food.splice(action.payload, 1);
@@ -126,6 +129,7 @@ export const { setSex,
                 convertFeetAndInchesToCm,
                 addFood,
                 updateFoodQuantity,
+                updateDailyIntake,
                 removeFood
             } = plannerSlice.actions;
 export default plannerSlice.reducer;
