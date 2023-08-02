@@ -1,0 +1,6 @@
+@media (max-width: 450px) {
+    .nutrition_calc {
+        display:flex;
+        flex-direction: column;
+    }
+}

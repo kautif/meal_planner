@@ -5,3 +5,9 @@
 .metricCalc__form {
     width: 50%;
 }
+
+@media (max-width: 450px) {
+    .metricCalc__form-container {
+        width: 100%;
+    }
+}

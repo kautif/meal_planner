@@ -31,12 +31,12 @@ export default function FoodList () {
         <div>
             <Nav />
             <h1>Food List</h1>
-            <div className="d-flex">
+            <div>
                 <div>
                 <p>Expected Daily Intake: {dailyIntake === 0 ? <span>Go here to calculate your daily intake: <Link to="/calculations">Calculations</Link></span> : dailyIntake}</p>
                     <p>Current Daily Intake: <span className={currentIntake <= dailyIntake ? "text-success" : "text-danger"}>{currentIntake}</span></p>
                 </div>
-                <table className="ml-auto mt-3">
+                <table className="ml-auto mr-auto mt-3">
                         <tr>
                             <th>Food</th>
                             <th>Brand</th>

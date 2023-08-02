@@ -4,9 +4,15 @@
 }
 
 .basicInfo__form {
-    width: 55%;
+    width: 90%;
 }
 
 .row {
     flex-direction: column;
+}
+
+@media (max-width: 450px) {
+    .basicInfo-container {
+        width: 100%;
+    }
 }

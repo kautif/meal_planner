@@ -77,7 +77,6 @@ export const plannerSlice = createSlice({
         },
         setLbs: (state, action) => {
             state.convert.lbs = action.payload;
-            console.log("lbs: ", state.convert.lbs);
         },
         convertLbsToKg: (state) => {
             const lbsToKg = state.convert.lbs / 2.205;
@@ -85,18 +84,15 @@ export const plannerSlice = createSlice({
         },
         setFeet: (state, action) => {
             state.convert.feet = action.payload
-            console.log("setFeet: ", state.convert.feet);
         },
         setInches: (state, action) => {
             state.convert.inches = action.payload;
-            console.log("setInches: ", state.convert.inches);
         },
         convertFeetAndInchesToCm: (state, action) => {
             const feetToCm = state.convert.feet * 30.48;
             const inchesToCm = state.convert.inches * 2.54;
             const cmConversion = feetToCm + inchesToCm;
             state.convert.cm = cmConversion.toFixed(2);
-            console.log("cm conversion: ", state.convert.cm);
         },
         addFood: (state, action) => {
             state.food = [...state.food, action.payload];

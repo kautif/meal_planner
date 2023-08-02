@@ -15,7 +15,7 @@ export default function MetricCalc () {
                 <Row className="mt-3">
                     <Form onSubmit={(e) => e.preventDefault()}>
                         <Form.Group>
-                            <Form.Label>Convert Lbs to Kg</Form.Label>
+                            <Form.Label><strong>Convert Lbs to Kg</strong></Form.Label>
                             <Form.Control
                             type="number"
                             placeholder="Enter weight"
@@ -31,7 +31,7 @@ export default function MetricCalc () {
                 <Row className="mt-3">
                     <Form onSubmit={(e) => e.preventDefault()}>
                         <Form.Group>
-                            <Form.Label>Convert Feet and Inches to Centimeters</Form.Label>
+                            <Form.Label><strong>Convert Feet and Inches to Centimeters</strong></Form.Label>
                             <Form.Control
                             className="mt-2"
                             type="number"

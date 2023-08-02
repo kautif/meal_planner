@@ -12,10 +12,11 @@ export default function BasicInfo () {
     const dispatch = useDispatch();
     const dailyIntake = useSelector((state) => state.planner.dailyIntake);
     return (
-        <div className="basicInfo__container">
+        <div className="basicInfo-container">
         <Form>
             <Container className="basicInfo__form">
                 <Row xs={1} className="mt-3">
+                    <p><strong>Calculate Daily Caloric Intake</strong></p>
                     <Form.Group controlId="sex">
                         <Form.Check
                             required 
@@ -91,8 +92,8 @@ export default function BasicInfo () {
                     </Form.Group>
                 </Row>
                 <Row className="mt-3">
-                    <h3>Daily Caloric Intake</h3>
-                    <h5>{dailyIntake}</h5>
+                    <p>Daily Caloric Intake</p>
+                    <p>{dailyIntake}</p>
                 </Row>
             </Container>
         </Form>
