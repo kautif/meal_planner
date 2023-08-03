@@ -59,7 +59,7 @@ function Nutrition () {
                                 }
                             })
                         }</td>
-                        <td><input className={`w-50 food-quantity-${i}`} type="number" /></td>
+                        <td><input className={`w-50 food-quantity food-quantity-${i}`} type="number" /></td>
                         <td><button
                                 onClick={() => {
                                     executed = false;
@@ -111,7 +111,9 @@ function Nutrition () {
                                             }))
                                             executed = true;
                                         }
-
+                                    }
+                                    for (let i = 0; i < document.getElementsByClassName('food-quantity').length; i++) {
+                                        document.getElementsByClassName('food-quantity')[i].value = "";
                                     }
                                 }}
 
@@ -128,8 +130,10 @@ function Nutrition () {
             <Form onSubmit={(e) => {
                     e.preventDefault();
                     getNutrition();
+                    document.getElementById('search-text').value = "";
                 }}>
                 <Form.Control
+                    id="search-text"
                     className="mt-3"
                     type="text"
                     placeholder="Enter search terms"
@@ -144,6 +148,7 @@ function Nutrition () {
                     onClick={(e) => {
                         e.preventDefault();
                         getNutrition();
+                        document.getElementById('search-text').value = "";
                 }}>Search</Button>
             </Form>
             <div className="meal-planner__addfood__table">
